@@ -13,6 +13,8 @@ from flask_resources import CollectionResource, SingletonResource
 from flask_resources.context import resource_requestctx
 from flask_resources.resources import ResourceConfig
 
+from ..services import DraftService, DraftVersionService
+
 # TODO: Get rid of them when implementation is done
 STUB_ITEM_RESULT = ({"TODO": "IMPLEMENT ME"}, 200)
 STUB_LIST_RESULT = ([{"TODO": "IMPLEMENT ME"}], 200)
@@ -67,13 +69,20 @@ class DraftVersionResource(CollectionResource):
 
     default_config = DraftVersionResourceConfig
 
+    def __init__(self, service=None, *args, **kwargs):
+        """Constructor."""
+        super(DraftVersionResource, self).__init__(*args, **kwargs)
+        self.service = service or DraftVersionService()
+
     def search(self, *args, **kwargs):
         """Perform a search over the items."""
-        return STUB_LIST_RESULT
+        # TODO: IMPLEMENT ME!
+        return self.service.search()
 
     def create(self, *args, **kwargs):
         """Create an item."""
-        return STUB_ITEM_RESULT
+        # TODO: IMPLEMENT ME!
+        return self.service.create()
 
 
 class DraftActionResourceConfig(ResourceConfig):
